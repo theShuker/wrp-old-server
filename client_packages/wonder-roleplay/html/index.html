@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>if(!mp) var mp = false</script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/nouislider.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/odometer-theme-car.css">
+
+    <script src="js/vendor/jquery.min.js"></script>
+    <script src="js/vendor/nouislider.min.js"></script>
+    <script src="js/vendor/jquery-ui.min.js"></script>
+
+
+    <script src="js/main.js" defer></script>
+    <script src="js/gui.js" defer></script>
+    <script src="js/inventory.js" defer></script>
+    <script src="js/interaction.js" defer></script>
+
+    <script src="js/authorization.js"></script>
+    <script src="js/popups.js" defer></script>
+
+    <script src="js/money.js" defer></script>
+    <script src="js/speedometer.js" defer></script>
+    <script src="js/vendor/odometer.min.js" defer></script>
+
+    <script src="js/customization.js" defer></script>
+
+    <script>
+      window.odometerOptions = {
+        format: '(,ddd).d',
+        duration: 1500
+      };
+    </script>
+    <style>
+      .gui{
+        display: none;
+        visibility: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="console" style="margin-top: 40px;margin: 20px; position: fixed; right: 0; max-width: 50%; background: rgba(0,0,0,.2); max-height: 50vh; overflow: hidden;">
+        <ul id="console-out">
+          <li>Console created</li>
+        </ul>
+      </div>
+
+<!-- INDICATORS-->
+
+      <div class="money gui">
+        <span id="moneyamount">0</span>$
+      </div>
+
+      <div class="speedo gui"> 
+        <div class="speed">146<span>КМ/Ч</span></div>
+        <div class="rpm">
+          <img class="rpm-arrow" src="img/speed-arrow.png">
+          
+        </div>
+        <div class="doors open"></div>
+        <div class="gear">?<span class="text">ПЕРЕДАЧА</span></div>
+        <div class="fuel">ТОПЛИВО: ???</div>
+        <div class="odometer">????????</div>
+      </div>
+
+      <div class="notice-menu">
+      </div>
+
+      <div class="action-bar gui">
+        <div class="text">Action</div>
+        <div class="progress"><span class="number">0</span>%</div>
+      </div>
+
+<!-- AUTHORIZATION-->
+
+      <div class="register gui">
+        <img src="img/logo.png" alt="WRP">
+        <h1>Добро пожаловать на Wonder RolePlay, <span class="username">%USERNAME%</span>!</h1>
+        <p>Для начала игры, пожалуйста, зарегистрируйтесь</p>
+        <div class="input-wrapper">
+          <label for="pw1" class="icon fa fa-key"></label>
+          <input id="register-pw1" type="password" name="pw1" placeholder="Пароль" class="use-icon" required>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="pw2" class="icon fa fa-key"></label>
+          <input id="register-pw2" type="password" name="pw2" placeholder="Подтверждение пароля" class="use-icon" required>
+        </div>
+        
+        <div class="input-wrapper">
+          <label for="email" class="icon fa fa-envelope"></label>
+          <input id="register-email" type="email" name="email" placeholder="E-mail" class="use-icon" required>
+        </div>
+
+        <div class="input-wrapper">
+          <label for="invite" class="icon fa fa-handshake-o"></label>
+          <input id="register-invite" type="text" name="invite" placeholder="Ник пригласившего Вас игрока" class="use-icon">
+        </div>
+        
+        <div class="input-buttons">
+          <div class="half">
+            <input type="submit" value="Зарегистрироваться" name="proceed" class="btn btn-green" onclick="authSubmit('register')">
+          </div>
+          <div class="half">
+            <input type="submit" value="Выход" name="abort" class="btn btn-red" onclick="mp.trigger('authQuit');">
+          </div>
+        </div>
+      </div>
+
+      <div class="login gui">
+        <img src="img/logo.png" alt="WRP">
+        <h1>Привет, <span class="username">%USERNAME%</span>!</h1>
+        <p>Для входа, введите Ваш пароль.</p>
+        <div class="input-wrapper">
+          <label for="pw1" class="icon fa fa-key"></label>
+          <input id="login-password" type="password" name="pw1" placeholder="Пароль" class="use-icon" required>
+        </div>
+        
+        <div class="input-buttons">
+          <input type="submit" value="Войти" name="proceed" class="btn btn-green" onclick="authSubmit('login')">
+          <input type="submit" value="Выход" name="abort" class="btn btn-red" onclick="mp.trigger('authQuit');">
+        </div>
+      </div>
+
+      <div class="banned gui">
+        <img src="img/logo.png" alt="WRP">
+        <h1>Вы забанены на данном сервере!</h1>
+        <p>Аккаунт <b class="username"></b> забанен. Для разбана, зайдите на наш сайт <a href="https://wonder-roleplay.ru">Wonder RolePlay</a> в раздел "Разбан"</p>
+        <input type="submit" value="Выход" name="abort" class="btn btn-red" onclick="mp.trigger('authQuit');">
+      </div>
+
+      <!--<div class="interaction-possible">
+        <span>Нажмите</span>
+        <kbd class="shaking">E</kbd>  
+      </div>-->
+
+
+    <div class="copyright">
+      <img src="img/logo.png">
+      <span>wonder-roleplay.ru</span>
+    </div>
+      
+<!-- /body -->
+    </div>
+    <script>
+        $(document).ready(function(){ 
+          
+          $(document).on('input', "[data-bindto]", function(){
+            var target = $(this)
+            if(target.data('bindto')){
+              $('#'+target.data('bindto')).html(target.val())
+            }
+          })
+
+          //guiProcess(JSON.stringify({title: 'Инвентарь'}))
+          if(mp) mp.trigger('cefReady');
+
+          setInterval(()=>{
+            if(mp)mp.trigger("tick")
+          }, 1000)
+        })
+    </script>
+  </body>
+</html>

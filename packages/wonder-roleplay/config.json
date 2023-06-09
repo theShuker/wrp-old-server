@@ -1,0 +1,36 @@
+{
+    "NOLOGIN":true,
+    "alterTables": false,
+
+    "gamemode": "W-RP",
+    "debug": true,
+    "version": "0.1",
+
+    "maxconnections": 3,
+    "realtimesync": false,
+    "salt": "Ksd7SJrAS^SFkenhSS5s82SH",
+    "dcPosTimeout": 7200000, 
+    "announcePlayerJoins": true,
+    "db": {
+        "host"     : "localhost",
+        "user"    : "root",
+        "password" : "Sudosur00t",
+        "database" : "wonder_db2"
+    },
+    "ranges": {
+        "default": 15,
+        "whisper": 2,
+        "shout": 30,
+        "action": 15,
+        "actionInCar": 5,
+        "megaphone": 50
+    },
+    "links": {
+        "site": "wonder-roleplay.ru",
+        "forum": "forum.wonder-roleplay.ru",
+        "vk": "vk.com/playwrp"
+    },
+    "api": {
+        "port": 1337
+    }
+}

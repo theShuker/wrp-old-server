@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face{
+    font-family: 'Comfortaa';
+    src: url('../fonts/Comfortaa-regular.ttf')
+}
+
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    color: white;
+    font-size: 14px;
+    -webkit-user-select: none;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.ui_element {
+    display: none;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+
+#chat {
+    display: block;
+    z-index: 0;
+    color: white;
+    font-family: 'Comfortaa', sans-serif;
+    /*text-shadow: -1px 0 #000000, 0 1px #000000, 1px 0 #000000, 0 -1px #000000;*/
+    text-shadow: rgb(34, 34, 34) 2px 0px 0px, rgb(34, 34, 34) 1.75517px 0.958851px 0px, rgb(34, 34, 34) 1.0806px 1.68294px 0px, rgb(34, 34, 34) 0.141474px 1.99499px 0px, rgb(34, 34, 34) -0.832294px 1.81859px 0px, rgb(34, 34, 34) -1.60229px 1.19694px 0px, rgb(34, 34, 34) -1.97998px 0.28224px 0px, rgb(34, 34, 34) -1.87291px -0.701566px 0px, rgb(34, 34, 34) -1.30729px -1.5136px 0px, rgb(34, 34, 34) -0.421592px -1.95506px 0px, rgb(34, 34, 34) 0.567324px -1.91785px 0px, rgb(34, 34, 34) 1.41734px -1.41108px 0px, rgb(34, 34, 34) 1.92034px -0.558831px 0px;
+    font-size: 14px;
+    line-height: 24px;
+    margin-left: 15px;
+}
+
+@media screen and (min-height: 1080px) {
+    #chat {
+        font-size: 16px!important;
+        font-weight: bold;
+    }
+}
+
+#chat ul#chat_messages {
+    overflow: hidden;
+    height: 250px;
+    margin-top: 5vh;
+    transform: rotate(180deg);
+    width: 35vw;
+}
+
+#chat ul#chat_messages>li {
+    padding-left: 5px;
+    transform: rotate(-180deg);
+}
+
+#chat input#chat_msg {
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    outline: none;
+    border: none;
+    font-family: 'Comfortaa', sans-serif;
+    font-size: 14px;
+    line-height: 35px;
+    width: 35vw;
+    padding: 5px 5px 5px 15px;
+}
+
+#chat_channels li {
+    float: left;
+    border: 1px solid black;
+    list-style-type: none;
+    padding: 5px 15px;
+    margin: 5px 5px 0px 0px;
+    text-transform: uppercase;
+    font-size: 13px;
+    text-shadow: none;
+}
+
+#chat_channels li#active {
+    color: rgb(165, 69, 165);
+}
